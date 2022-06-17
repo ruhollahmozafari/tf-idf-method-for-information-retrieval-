@@ -23,15 +23,14 @@ def scrap_year():
         html = requests.get(main_page_url).text  # Download html of the page
 
         soup = BeautifulSoup(html, features='lxml')
-
+    
         links = soup.find_all('h2')
-
+        print(links)
         if repetitive(links, url_list):
             break
 
         for link in tqdm(links):
             page_url = 'https://donya-e-eqtesad.com/' + link.a['href']
-            print(f'this is the page_url chek it : \n {page_url}')
             url_list.append(link.a['href'])
             try:
                 article = Article(page_url)
